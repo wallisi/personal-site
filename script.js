@@ -86,6 +86,23 @@
   reveals.forEach(el => observer.observe(el));
 })();
 
+// ===== Video thumbnail click-to-play =====
+(function () {
+  document.querySelectorAll('.video-embed[data-video-id]').forEach(embed => {
+    embed.addEventListener('click', function () {
+      const id = this.dataset.videoId;
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', '');
+      this.innerHTML = '';
+      this.style.cursor = 'default';
+      this.appendChild(iframe);
+    });
+  });
+})();
+
 // ===== Smooth scroll for anchor links =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
